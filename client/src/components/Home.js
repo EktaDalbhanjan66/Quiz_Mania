@@ -11,7 +11,6 @@ const Home = () => {
   const getAllQuiz = async () => {
     try {
       const { data } = await axios.get(`${config.endpoint}/quiz/get-all-quiz`);
-      console.log(data.data);
       if (data.success) {
         message.success(data.message);
         setAllQuiz(data.data);

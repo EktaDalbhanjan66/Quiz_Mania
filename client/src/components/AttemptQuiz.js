@@ -45,13 +45,14 @@ const AttemptQuiz = () => {
       message.error(error);
     }
   };
-//Submit the Quiz
+  //Submit the Quiz
   const handleSubmitQuiz = async () => {
     try {
       dispatch(showLoading());
       const score = quiz.questions.reduce((accumulator, currentValue, ind) => {
         return (
-          accumulator + (currentValue.answer === selectedAnswers[ind] ? 1 : 0)
+          accumulator +
+          (currentValue.answer === (selectedAnswers[ind] || null) ? 1 : 0)
         );
       }, 0);
 
@@ -77,7 +78,7 @@ const AttemptQuiz = () => {
       message.error(error.message);
     }
   };
-// go to leaderbooard
+  // go to leaderbooard
   const goToLeaderBoard = async () => {
     navigate(`/leaderboard/${quizId}`);
   };
@@ -91,7 +92,10 @@ const AttemptQuiz = () => {
           quizId,
         }
       );
-      console.log(data);
+      if (data.isAttempted) {
+        message.warning("Quiz Already Attempted");
+        navigate("/");
+      }
     } catch (error) {
       message.error(error.message);
     }

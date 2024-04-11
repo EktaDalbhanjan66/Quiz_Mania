@@ -14,6 +14,14 @@ const Quiz = ({ quiz }) => {
       >
         Attempt Quiz
       </button>
+      <button
+        onClick={() => {
+          navigate(`/leaderboard/${quiz._id}`);
+        }}
+      >
+        View leaderboard
+      </button>
+      
     </div>
   );
 };
